@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: transparent;
+      font-family: 'Arial Black', sans-serif;
+      overflow: hidden;
+    }
+    .scoreboard-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100vw;
+      padding: 15px 30px;
+      box-sizing: border-box;
+    }
+    .team-badge {
+      background-color: rgba(0, 0, 0, 0.85);
+      color: #FFFFFF;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 28px;
+      text-transform: uppercase;
+      border-bottom: 5px solid #FF5722;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scoreboard-container">
+    <div id="team-local" class="team-badge">CARGANDO...</div>
+    <div id="team-visit" class="team-badge">CARGANDO...</div>
+  </div>
+
+  <script>
+    const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSQUTRjxhCJmOa0HaN92DYeyN9kb7gwdiCJpfOFApQArMlK9-SfaDo5SHS_0Woc1TK9R4NdD-fmTcKY/pub?gid=1838989057&single=true&output=csv';
+
+    async function actualizarMarcador() {
+      try {
+        const response = await fetch(CSV_URL);
+        const text = await response.text();
+        const filas = text.split('\n');
+        if (filas.length > 1) {
+          const datos = filas[1].split(',');
+          if (datos[0]) document.getElementById('team-local').innerText = datos[0].trim();
+          if (datos[1]) document.getElementById('team-visit').innerText = datos[1].trim();
+        }
+      } catch (err) {
+        console.error('Error al actualizar datos:', err);
+      }
+    }
+
+    setInterval(actualizarMarcador, 3000);
+    actualizarMarcador();
+  </script>
+</body>
+</html>
