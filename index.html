@@ -42,15 +42,15 @@
   </div>
 
   <script>
-    // URL de la API de tu Google Sheet publicado como JSON
-    const SHEET_API_URL = 'https://docs.google.com/spreadsheets/d/1DGpRh3TD7cp1LaxPpIXRv3XI2sZzqgcRp-Lav3FsWic/edit?pli=1&gid=1838989057#gid=1838989057';
+    // URL Web App de tu Google Apps Script (/exec)
+    const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbxxUUyVeEbeRJP2L2sZYwKQ6ZdvRrme-C9-T_NorlpoBjbd4QjGnJbOqMxfykm09WDY/exec';
 
     async function actualizarEquipos() {
       try {
         const response = await fetch(SHEET_API_URL);
         const data = await response.json();
         
-        // Lee los nombres cargados en la planilla
+        // Lee los nombres cargados en la planilla EN_VIVO
         document.getElementById('team-local').innerText = data.local || 'LOCAL';
         document.getElementById('team-visit').innerText = data.visitante || 'VISITA';
       } catch (error) {
