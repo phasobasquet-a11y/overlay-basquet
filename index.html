@@ -2,9 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* Fondo transparente para overlay */
+    /* Fondo transparente para que solo se vean los nombres sobre la cámara */
     body {
       margin: 0;
       padding: 0;
@@ -30,7 +29,7 @@
       border-radius: 6px;
       font-size: 24px;
       text-transform: uppercase;
-      border-bottom: 4px solid #FF5722; /* Accent deportivo */
+      border-bottom: 4px solid #FF5722; /* Color deportivo */
       box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
   </style>
@@ -38,20 +37,20 @@
 <body>
 
   <div class="scoreboard-overlay">
-    <div id="team-local" class="team-badge">CARGANDO...</div>
-    <div id="team-visit" class="team-badge">CARGANDO...</div>
+    <div id="team-local" class="team-badge">LOCAL</div>
+    <div id="team-visit" class="team-badge">VISITA</div>
   </div>
 
   <script>
-    // URL Web App de tu Google Apps Script
-    const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbxxUUyVeEbeRJP2L2sZYwKQ6ZdvRrme-C9-T_NorlpoBjbd4QjGnJbOqMxfykm09WDY/exec';
+    // URL de la API de tu Google Sheet publicado como JSON
+    const SHEET_API_URL = 'https://docs.google.com/spreadsheets/d/1DGpRh3TD7cp1LaxPpIXRv3XI2sZzqgcRp-Lav3FsWic/edit?pli=1&gid=1838989057#gid=1838989057';
 
     async function actualizarEquipos() {
       try {
         const response = await fetch(SHEET_API_URL);
         const data = await response.json();
         
-        // Carga los equipos definidos en la pestaña EN_VIVO
+        // Lee los nombres cargados en la planilla
         document.getElementById('team-local').innerText = data.local || 'LOCAL';
         document.getElementById('team-visit').innerText = data.visitante || 'VISITA';
       } catch (error) {
@@ -59,7 +58,7 @@
       }
     }
 
-    // Consulta la planilla cada 3 segundos
+    // Consulta la planilla cada 3 segundos para cambiar los nombres en tiempo real
     setInterval(actualizarEquipos, 3000);
     actualizarEquipos();
   </script>
