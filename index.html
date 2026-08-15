@@ -43,8 +43,8 @@
 
   <script>
     // URL Web App de tu Google Apps Script (/exec)
-    const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbxxUUyVeEbeRJP2L2sZYwKQ6ZdvRrme-C9-T_NorlpoBjbd4QjGnJbOqMxfykm09WDY/exec';
-
+    const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbxxUUyVeEbeRJP2L2sZYwKQ6ZdvRrme-C9-T_NorlpoBjbd4QjGnJbOqMxfykm09WDY/exec?api=true';
+    
     async function actualizarEquipos() {
       try {
         const response = await fetch(SHEET_API_URL);
